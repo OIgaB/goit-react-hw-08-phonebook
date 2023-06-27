@@ -1,20 +1,37 @@
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { UserMenu } from '../UserMenu/UserMenu';
+import { AuthNav } from 'components/AuthNav/AuthNav';
+import { getIsLoggedIn } from 'redux/selectors';
 
-export const AppBar = () => {       
+
+const styles = {
+    link: {
+      display: 'inline-block',
+      textDecoration: 'none',
+      padding: 12,
+      fontWeight: 700,
+      color: '#2A363B',
+    },
+    activeLink: {
+      color: '#E84A5F',
+    },
+  };
+
+export const AppBar = () => {  
+    const isLoggedIn = useSelector(getIsLoggedIn);     
 
     return (
         <header>
-            <div>
-                <a href="/" lang="en">Phonebook</a>
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li><a href="./">Contacts</a></li>
-                        <UserMenu/>
-                        <li><a href="">Sign up</a></li>
-                        <li><a href="">Log in</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <nav>
+                <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
+                    Phonebook
+                </NavLink>
+                <NavLink to="/contacts" exact style={styles.link} activeStyle={styles.activeLink}>
+                    Contacts
+                </NavLink>
+                {isLoggedIn ? <UserMenu/> : <AuthNav/>}
+            </nav>
         </header>
     );
 }
