@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom'
 import { loginThunk } from '../redux/operations';
+import { toast } from 'react-hot-toast'
 
 const styles = {
   form: {
@@ -18,6 +20,7 @@ export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'email':
@@ -27,13 +30,20 @@ export const LoginPage = () => {
       default:
         return;
     }
+    // або      name === 'email' ? setEmail(value) : setPassword(value)
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    dispatch(loginThunk({ email, password }));
-    setEmail('');
-    setPassword('');
+    try{
+      await dispatch(loginThunk({ email, password })).unwrap();
+      toast.success('Wellcome!')
+      setEmail('');
+      setPassword('');
+
+    } catch(error) {
+      toast.error('Error Login')
+    }
   };
 
   return (
@@ -61,7 +71,13 @@ export const LoginPage = () => {
           />
         </label>
 
-        <button type="submit">Log in</button>
+        <button 
+          type="submit"
+          disabled={!email || !password}
+        >
+            Log in
+        </button>
+        <Link to='/register'>Sign Up</Link>
       </form>
     </div>
   );
