@@ -2,6 +2,9 @@ import { Suspense, lazy, useEffect, useMemo } from "react";
 import { Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { getContacts, getFilter } from "../redux/selectors";
+
+import { PublicRoute } from "./PublicRoute";
+import { PrivateRoute } from "./PrivateRoute";
 import { AppBar } from "./AppBar/AppBar";
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
