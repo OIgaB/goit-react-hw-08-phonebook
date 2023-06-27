@@ -1,11 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from 'components/AuthNav/AuthNav';
-import { useEffect } from 'react';
-import { getProfileThunk } from '../../redux/operations';
-import { setToken } from '../../services/auth-api';
-import { logOut } from '../../redux/authSlice';
 
 
 const styles = {
@@ -21,16 +17,8 @@ const styles = {
     },
   };
 
-export const AppBar = () => {  
-    const { access_token : isAuth, profile } = useSelector((state) => state.auth);  
-    const dispatch = useDispatch();   
-
-    useEffect(() => {
-        if(isAuth && !profile) {
-            setToken(isAuth)
-            dispatch(getProfileThunk()).unwrap().catch(() => dispatch(logOut()))
-        }
-    }, [isAuth, dispatch, profile])
+export const Header = () => {  
+    const { access_token : isAuth } = useSelector((state) => state.auth);  
 
     return (
         <header>

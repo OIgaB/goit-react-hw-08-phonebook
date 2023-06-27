@@ -7,7 +7,7 @@ import { ContactList } from '../components/ContactList/ContactList';
 import { Container, SubTitle, AlertMessage } from "../components/styled";
 
 
-export const ContactsPage = () => {
+const ContactsPage = () => {
   const { items: contacts, loading, error } = useSelector(getContacts); // items - масив об'єктів зі стору
   const filter = useSelector(getFilter); // рядок зі стору
   
@@ -31,3 +31,5 @@ export const ContactsPage = () => {
         </Container>
     );
   }
+
+  export default ContactsPage;

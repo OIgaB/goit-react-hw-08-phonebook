@@ -1,14 +1,13 @@
 import { useSelector } from "react-redux"
-import { Route, Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { getAuth } from "redux/selectors";
 
-export const PrivateRoute = ({ children, ...routeProps }) => {
-    const isAuth = useSelector(getAuth); 
+
+const PrivateRoute = ({ children }) => {
+    const { access_token: isAuth } = useSelector(getAuth); 
     const location = useLocation();
 
-    return (
-        <Route {...routeProps}>
-            {isAuth ? children : <Navigate to={location} />}
-        </Route>
-    );
+    return isAuth ? children : <Navigate to={location} /> // якщо токен є, побачиш контакти, а якщо немає - повернешся на логін/реєстрацію
 }
+
+export default PrivateRoute;

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Suspense, lazy } from "react";
-import { Switch } from 'react-router-dom';
+import { lazy } from "react";
+import { Route, Routes } from 'react-router-dom';
 
+import { Layout } from './Layout/Layout';
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
-import { AppBar } from "./AppBar/AppBar";
-import { Container, Title } from "./styled";
 import { fetchContacts } from "../redux/operations";
+import { Container } from "./styled";
 
 const HomePage = lazy(() => import('../pages/HomePage'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage'));
@@ -25,29 +25,34 @@ export const App = () => {
 
   return (
     <Container>
-      <AppBar/>
-      <Switch>
-        <Suspense fallback={<p>Downloading...</p>}>
+      <Routes>  
+        <Route path='/' element={<Layout/>}>    {/* Header і Outlet (children) */}
+            <Route index element={<HomePage/>} />
+            <Route
+                path='/contacts'
+                element={
+                    <PrivateRoute  redirectTo='/login'>
+                      <ContactsPage/>
+                    </PrivateRoute>                     
+                }
+            />  
+        </Route>       
+        <Route path="/register"  // restricted
+            element={
+              <PublicRoute >
+                  <RegisterPage/>
+              </PublicRoute> 
+            }
+        />
+        <Route path="/login" // restricted
+          element={
+            <PublicRoute >
+                <LoginPage/>
+            </PublicRoute> 
+          }
+        />
 
-          <PublicRoute exact path="/">
-            <Title>Phonebook</Title>
-            <HomePage/>
-          </PublicRoute>
-
-          <PublicRoute exact path="/register" restricted>
-            <RegisterPage/>
-          </PublicRoute>
-
-          <PublicRoute exact path="/login" redirectTo='/contacts' restricted>
-            <LoginPage/>
-          </PublicRoute>
-
-          <PrivateRoute path='/contacts' redirectTo='/login'>
-            <ContactsPage/>
-          </PrivateRoute>
-
-        </Suspense>
-      </Switch>
+      </Routes>
     </Container>
   );
 }
