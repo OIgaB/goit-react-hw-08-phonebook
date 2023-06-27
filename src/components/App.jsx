@@ -1,11 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { Suspense, lazy, useEffect, useMemo } from "react";
+import { Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { getContacts, getFilter } from "../redux/selectors";
+import { AppBar } from "./AppBar/AppBar";
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { fetchContacts } from "../redux/operations";
 import { Container, Title, SubTitle, AlertMessage } from "./styled";
+
+const HomePage = lazy(() => import('../pages/HomePage'));
 
 
 export const App = () => {
@@ -30,17 +34,34 @@ export const App = () => {
 
   return (
     <Container>
-      <Title>Phonebook</Title>
-      <ContactForm /> 
+      <AppBar/>
+      <Switch>
+        <Suspense fallback={<p>Downloading...</p>}>
+          <PublicRoute exact path="/">
+            <Title>Phonebook</Title>
+            <HomePage/>
+          </PublicRoute>
 
-      <SubTitle>Contacts</SubTitle>
-      <Filter />
+          <PublicRoute exact path="/register" restricted>
+            <RegisterPage/>
+          </PublicRoute>
 
-      {error && <h2>{error}</h2>}
-      {loading && <h2>Loading...</h2>} 
-      {filteredContacts.length !== 0 && <ContactList />}
-      {filteredContacts.length === 0 && <AlertMessage>There is no contact matching your request.</AlertMessage>} 
-          
+          <PublicRoute exact path="/login" redirectTo='/contacts' restricted>
+            <LoginPage/>
+          </PublicRoute>
+
+          <PrivateRoute path='/contacts' redirectTo='/login'>
+            <ContactForm /> 
+            <SubTitle>Contacts</SubTitle>
+            <Filter />
+
+            {error && <h2>{error}</h2>}
+            {loading && <h2>Loading...</h2>} 
+            {filteredContacts.length !== 0 && <ContactList />}
+            {filteredContacts.length === 0 && <AlertMessage>There is no contact matching your request.</AlertMessage>} 
+          </PrivateRoute>
+      </Suspense>
+      </Switch>
     </Container>
   );
 }
