@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: '',
 });
 
-const setToken = (token) => {
+export const setToken = (token) => {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 

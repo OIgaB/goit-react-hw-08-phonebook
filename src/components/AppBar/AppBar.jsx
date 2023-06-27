@@ -1,8 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from 'components/AuthNav/AuthNav';
-import { getIsLoggedIn } from 'redux/selectors';
+import { useEffect } from 'react';
+import { getProfileThunk } from '../../redux/operations';
+import { setToken } from '../../services/auth-api';
+import { logOut } from '../../redux/authSlice';
 
 
 const styles = {
@@ -19,7 +22,15 @@ const styles = {
   };
 
 export const AppBar = () => {  
-    const isLoggedIn = useSelector(getIsLoggedIn);     
+    const { access_token : isAuth, profile } = useSelector((state) => state.auth);  
+    const dispatch = useDispatch();   
+
+    useEffect(() => {
+        if(isAuth && !profile) {
+            setToken(isAuth)
+            dispatch(getProfileThunk()).unwrap().catch(() => dispatch(logOut()))
+        }
+    }, [isAuth, dispatch, profile])
 
     return (
         <header>
@@ -30,7 +41,7 @@ export const AppBar = () => {
                 <NavLink to="/contacts" exact style={styles.link} activeStyle={styles.activeLink}>
                     Contacts
                 </NavLink>
-                {isLoggedIn ? <UserMenu/> : <AuthNav/>}
+                {isAuth ? <UserMenu/> : <AuthNav/>}
             </nav>
         </header>
     );
