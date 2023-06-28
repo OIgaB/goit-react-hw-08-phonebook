@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { logOut } from "../../redux/authSlice";
 import { dellToken } from '../../services/auth-api';
+import { getAuth } from "../../redux/selectors";
 
 
 export const UserMenu = () => {       
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { access_token: isAuth, profile } = useSelector((state) => state.auth);
+    const { access_token: isAuth, profile } = useSelector(getAuth);
 
     const handleLogOut = () => {
         dispatch(logOut());
