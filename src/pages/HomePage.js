@@ -16,10 +16,13 @@ const styles = {
 
 const HomePage = () => (
   <div style={styles.container}>
-    <h1 style={styles.title}>
-        Welcome to our user-friendly phonebook app, your ultimate solution for contact management. Sign up, log in, and effortlessly create, update, and delete contacts, while enjoying the convenience of making calls within the app. Experience seamless connectivity and stay organized with ease. {' '}
-        <span role="img" aria-label="phone">☎️</span>
-    </h1>
+    <h1 style={styles.title}>Phonebook</h1>
+    <p>
+      Welcome to the phonebook app, your ultimate solution for contact management. 
+      Sign up, log in, and effortlessly create, update, and delete contacts, while enjoying the convenience of making calls within the app. 
+      Experience seamless connectivity and stay organized with ease. 
+      <span role="img" aria-label="phone">☎️</span>
+    </p>
   </div>
 );
 

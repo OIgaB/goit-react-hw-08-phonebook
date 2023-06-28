@@ -9,20 +9,22 @@ const styles = {
     fontWeight: 700,
     color: '#2A363B',
   },
-  activeLink: {
-    color: '#E84A5F',
-  },
+  // activeLink: {
+  //   color: '#E84A5F',
+  // },
 };
 
 export const AuthNav = () => {
   return (
     <div>
-      <NavLink to="/register" exact style={styles.link} activeStyle={styles.activeLink}>
+      <NavLink to="/register" style={styles.link} > 
         Sign up
       </NavLink>
-      <NavLink to="/login" exact style={styles.link} activeStyle={styles.activeLink}>
+      {/* activeStyle={styles.activeLink} */}
+      <NavLink to="/login" style={styles.link} >
         Log in
       </NavLink>
+      {/* activeStyle={styles.activeLink} */}
     </div>
   );
 }

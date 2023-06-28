@@ -20,7 +20,7 @@ const handleFulfilled = (state, { payload }) => {
 
 const handleFulfilledProfile = (state, { payload }) => {  
     state.isLoading = false;
-    state.items = payload;
+    state.profile = payload;
 }
 
 const handleRejected = (state, { error, payload }) => {
@@ -31,14 +31,14 @@ const handleRejected = (state, { error, payload }) => {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        logOut: (state) => {
-            state.access_token = ""
-            state.isLoading = false
-            state.error = ''
-            state.profile = null
-        }
-    },
+    // reducers: {
+    //     logOut: (state) => {
+    //         state.access_token = ""
+    //         state.isLoading = false
+    //         state.error = ''
+    //         state.profile = null
+    //     }
+    // },
     extraReducers: (builder) => {
         builder
             .addCase(loginThunk.fulfilled, handleFulfilled)
@@ -50,4 +50,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { logOut } = authSlice.actions;
+// export const { logOut } = authSlice.actions;

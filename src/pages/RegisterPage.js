@@ -1,6 +1,8 @@
 import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 import { signUp } from '../services/auth-api';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const styles = {
   form: {
@@ -19,6 +21,9 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
+
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case 'name':
@@ -34,11 +39,14 @@ const RegisterPage = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    signUp({ name, email, password });
+    signUp({ name, email, password }).then(() => {
+      toast.success('Sign up successfully!')
+      navigate('/login');
+    })
     // dispatch(signUp({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
+    // setName('');
+    // setEmail('');
+    // setPassword('');
   };
 
   return (

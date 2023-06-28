@@ -12,9 +12,9 @@ const styles = {
       fontWeight: 700,
       color: '#2A363B',
     },
-    activeLink: {
-      color: '#E84A5F',
-    },
+    // activeLink: {
+    //   color: '#E84A5F',
+    // },
   };
 
 export const Header = () => {  
@@ -23,12 +23,14 @@ export const Header = () => {
     return (
         <header>
             <nav>
-                <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
+                <NavLink to="/" style={styles.link} >
                     Phonebook
                 </NavLink>
-                <NavLink to="/contacts" exact style={styles.link} activeStyle={styles.activeLink}>
+                {/* activeStyle={styles.activeLink} */}
+                <NavLink to="/contacts" style={styles.link} >
                     Contacts
                 </NavLink>
+                {/* activeStyle={styles.activeLink} */}
                 {isAuth ? <UserMenu/> : <AuthNav/>}
             </nav>
         </header>
