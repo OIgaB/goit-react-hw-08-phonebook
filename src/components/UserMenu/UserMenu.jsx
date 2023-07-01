@@ -8,7 +8,7 @@ import { getAuth } from "../../redux/selectors";
 export const UserMenu = () => {       
     // const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { access_token: isAuth, profile } = useSelector(getAuth);
+    const { token, profile } = useSelector(getAuth);
 
     const handleLogOut = () => {
         console.log('Ми в ф-ції handleLogOut');
@@ -20,8 +20,8 @@ export const UserMenu = () => {
         <div>
             <p>mango@mail.com</p>
             {profile && <h4>{profile.name}</h4>}
-            <button type="button" onClick={() => isAuth ? handleLogOut() : navigate('/login')}>
-                {isAuth ? 'Logout' : 'Login'}
+            <button type="button" onClick={() => token ? handleLogOut() : navigate('/login')}>
+                {token ? 'Logout' : 'Login'}
             </button>
         </div> 
     );

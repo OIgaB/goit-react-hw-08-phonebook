@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk, getProfileThunk } from './operations';
 
 const initialState = {   
-    access_token: '',
+    token: '',
     isLoading: false,
     error: '',
     profile: null,
@@ -15,7 +15,7 @@ const handlePending = (state) => {
 
 const handleFulfilled = (state, { payload }) => { 
     state.isLoading = false;
-    state.access_token = payload.access_token;
+    state.token = payload.token;
 }
 
 const handleFulfilledProfile = (state, { payload }) => {  

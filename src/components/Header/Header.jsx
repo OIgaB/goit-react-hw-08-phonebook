@@ -18,7 +18,7 @@ const styles = {
   };
 
 export const Header = () => {  
-    const { access_token : isAuth } = useSelector((state) => state.auth);  
+    const { token } = useSelector((state) => state.auth);  
 
     return (
         <header>
@@ -31,7 +31,7 @@ export const Header = () => {
                     Contacts
                 </NavLink>
                 {/* activeStyle={styles.activeLink} */}
-                {isAuth ? <UserMenu/> : <AuthNav/>}
+                {token ? <UserMenu/> : <AuthNav/>}
             </nav>
         </header>
     );

@@ -2,11 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
 import { authReducer } from "./authSlice";
-// import persistStore from 'redux-persist/es/persistStore';
-import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { 
     persistStore,
+    persistReducer,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -19,11 +18,10 @@ import {
 const persistConfig = {
     key: 'token',
     storage,
-    whitelist: ['access_token'],  // в localStorage закидуємо лише токен
+    whitelist: ['token'],  // в localStorage закидуємо лише токен
 }
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
-
 
 export const store = configureStore({
     reducer: {

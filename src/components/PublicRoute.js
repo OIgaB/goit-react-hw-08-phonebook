@@ -5,13 +5,13 @@ import { getAuth } from "redux/selectors";
 
 
 const PublicRoute = ({ children }) => {  //restricted = false
-    const { access_token: isAuth } = useSelector(getAuth); 
+    const { token } = useSelector(getAuth); 
     const location = useLocation();
     const savedLocation = useRef(location.state?.from ?? '/');
-    // const shouldRedirect = isAuth && restricted;
+    // const shouldRedirect = token && restricted;
     // shouldRedirect ? <Navigate to={location.state ?? '/'} /> : children
 
-    return !isAuth ? children : <Navigate to={savedLocation.current} />
+    return !token ? children : <Navigate to={savedLocation.current} />
     // якщо токена немає, то побачиш форму реєстрації/логіна, а якщо є - переадресує на ту сторінку, яку хотів відвідати
 }
 

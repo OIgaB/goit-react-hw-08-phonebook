@@ -41,7 +41,7 @@ export const App = () => {
                 }
             />  
         </Route>       
-          <Route path="/register"  // restricted
+          <Route path="/register"  // restricted  
               element={
                 <Suspense fallback={<p>Downloading...</p>}>
                 <PublicRoute >
