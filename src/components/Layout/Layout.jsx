@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import { Header } from '../../components/Header/Header'
 import { setToken } from '../../services/auth-api';
-// import { getProfileThunk } from '../../redux/operations';
-// import { logOut } from '../../redux/authSlice';
+import { getProfileThunk } from '../../redux/authOperations';
+import { logoutThunk } from '../../redux/authOperations';
 
 
 export const Layout = () => {
@@ -13,9 +13,9 @@ export const Layout = () => {
     const dispatch = useDispatch();   
 
     useEffect(() => {
-        if(token && !profile) {
+        if(token && !profile) { //якщо токен є, але він вже не валідний (термін дії завершився), треба зловити помилку
             setToken(token)
-            // dispatch(getProfileThunk()).unwrap().catch(() => dispatch(logOut()))
+            dispatch(getProfileThunk()).unwrap().catch(() => dispatch(logoutThunk()))
         }
     }, [token, dispatch, profile])
 

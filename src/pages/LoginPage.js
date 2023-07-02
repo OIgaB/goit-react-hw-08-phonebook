@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { loginThunk } from '../redux/operations';
+import { loginThunk } from '../redux/authOperations';
 import { toast } from 'react-hot-toast'
 
 const styles = {

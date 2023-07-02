@@ -1,10 +1,10 @@
 // import { useMemo } from "react";
 // import { useSelector } from "react-redux";
 // import { getContacts, getFilter } from "../redux/selectors";
-// import { ContactForm } from '../components/ContactForm/ContactForm';
+import { ContactForm } from '../components/ContactForm/ContactForm';
 // import { Filter } from '../components/Filter/Filter';
 // import { ContactList } from '../components/ContactList/ContactList';
-// import { Container, SubTitle, AlertMessage } from "../components/styled";
+import { Container, SubTitle, AlertMessage } from "../components/styled";
 
 
 const ContactsPage = () => {
@@ -19,17 +19,17 @@ const ContactsPage = () => {
   //     return contacts.filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase())) 
   // }, [contacts, filter]);
     return (
-      <div>Це закрита сторінка</div>
-        // <Container>
-        //     <ContactForm /> 
-        //     <SubTitle>Contacts</SubTitle>
-        //     <Filter />
+      // <div>Це закрита сторінка</div>
+        <Container>
+            <ContactForm /> 
+            <SubTitle>Contacts</SubTitle>
+            {/* <Filter />
 
-        //     {error && <h2>{error}</h2>}
-        //     {loading && <h2>Loading...</h2>} 
-        //     {filteredContacts.length !== 0 && <ContactList />}
-        //     {filteredContacts.length === 0 && <AlertMessage>There is no contact matching your request.</AlertMessage>} 
-        // </Container>
+            {error && <h2>{error}</h2>}
+            {loading && <h2>Loading...</h2>} 
+            {filteredContacts.length !== 0 && <ContactList />}
+            {filteredContacts.length === 0 && <AlertMessage>There is no contact matching your request.</AlertMessage>}  */}
+        </Container>
     );
   }
 

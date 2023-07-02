@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, logoutThunk, getProfileThunk } from './operations';
+import { loginThunk, logoutThunk, getProfileThunk } from './authOperations';
 
 const initialState = {   
     token: '',
@@ -38,14 +38,6 @@ const handleRejected = (state, { error, payload }) => {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    // reducers: {
-    //     logOut: (state) => {
-    //         state.access_token = ""
-    //         state.isLoading = false
-    //         state.error = ''
-    //         state.profile = null
-    //     }
-    // },
     extraReducers: (builder) => {
         builder
             .addCase(loginThunk.fulfilled, handleLoginFulfilled)
@@ -58,4 +50,3 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-// export const { logOut } = authSlice.actions;

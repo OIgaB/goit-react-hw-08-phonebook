@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { logoutThunk } from '../../redux/operations';
+import { logoutThunk } from '../../redux/authOperations';
 import { getAuth } from "../../redux/selectors";
 
 
