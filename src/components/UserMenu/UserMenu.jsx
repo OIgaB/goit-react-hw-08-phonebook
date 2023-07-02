@@ -1,19 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-// import { logOut } from "../../redux/authSlice";
-// import { dellToken } from '../../services/auth-api';
+import { logoutThunk } from '../../redux/operations';
 import { getAuth } from "../../redux/selectors";
 
 
 export const UserMenu = () => {       
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { token, profile } = useSelector(getAuth);
 
     const handleLogOut = () => {
-        console.log('Ми в ф-ції handleLogOut');
-        // dispatch(logOut());
-        // dellToken();    
+        dispatch(logoutThunk());   
     }
 
     return (

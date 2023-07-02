@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, getProfileThunk } from './operations';
+import { loginThunk, logoutThunk, getProfileThunk } from './operations';
 
 const initialState = {   
     token: '',
@@ -13,9 +13,16 @@ const handlePending = (state) => {
     state.error = '';
 }
 
-const handleFulfilled = (state, { payload }) => { 
+const handleLoginFulfilled = (state, { payload }) => { 
     state.isLoading = false;
     state.token = payload.token;
+}
+
+const handleLogoutFulfilled = (state) => { // скидання стейту до вихідного стану 
+    state.isLoading = false;
+    state.token = '';
+    state.profile = null;
+    state.error = '';
 }
 
 const handleFulfilledProfile = (state, { payload }) => {  
@@ -41,7 +48,8 @@ const authSlice = createSlice({
     // },
     extraReducers: (builder) => {
         builder
-            .addCase(loginThunk.fulfilled, handleFulfilled)
+            .addCase(loginThunk.fulfilled, handleLoginFulfilled)
+            .addCase(logoutThunk.fulfilled, handleLogoutFulfilled)
             .addCase(getProfileThunk.fulfilled, handleFulfilledProfile)
             //спільні ф-ції обробки стану pending/rejected:
             .addMatcher(({ type }) => type.endsWith('/pending'), handlePending)

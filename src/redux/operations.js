@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // import { getContacts, postContact, excludeContact } from '../services/contacts-api';
-import { getProfile, login } from '../services/auth-api';
+import {  logIn, logOut, getProfile } from '../services/auth-api';
 
 // export const fetchContacts = createAsyncThunk(
 //     'contacts/fetchAll',
@@ -52,9 +52,20 @@ export const loginThunk = createAsyncThunk(
     'users/login',
     async (body, { rejectWithValue, dispatch }) => { // в body приходить {email, password} з LoginPage - завдяки dispatch
         try{
-            const data = await login(body);
+            const data = await logIn(body);
             dispatch(getProfileThunk());
             return data;
+        } catch (error){
+            return rejectWithValue(error.response.data.message);
+        }
+    }
+)
+
+export const logoutThunk = createAsyncThunk(
+    'users/logout',
+    async (_, { rejectWithValue }) => { // в body приходить {email, password} з LoginPage - завдяки dispatch
+        try{
+            await logOut();
         } catch (error){
             return rejectWithValue(error.response.data.message);
         }
