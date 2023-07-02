@@ -1,5 +1,5 @@
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { lazy } from "react";
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast'
@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 import { Layout } from './Layout/Layout';
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
-// import { fetchContacts } from "../redux/operations";
+import { fetchContactsThunk } from "../redux/contactsOperations";
 import { Container } from "./styled";
 
 // Відкладені імпорти. Сторінка не завантажиться, якщо її не відвідати
@@ -20,11 +20,11 @@ const ContactsPage = lazy(() => import ('../pages/ContactsPage'));
 
 export const App = () => {
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //     dispatch(fetchContacts()) // при першому рендері викликає ф-цію запиту на бекенд за контактами
-  // }, [dispatch]); //useEffect не знає що таке dispatch/чи він здатен змінитися і про всяк випадок просить його в залежність
+  useEffect(() => {
+      dispatch(fetchContactsThunk()) // при першому рендері викликає ф-цію запиту на бекенд за контактами
+  }, [dispatch]); //useEffect не знає що таке dispatch/чи він здатен змінитися і про всяк випадок просить його в залежність
 
   return (
     <Container>
@@ -41,7 +41,7 @@ export const App = () => {
                 }
             />  
         </Route>       
-          <Route path="/register"  // restricted  
+          <Route path="/register"  
               element={
                 <Suspense fallback={<p>Downloading...</p>}>
                 <PublicRoute >
@@ -50,7 +50,7 @@ export const App = () => {
                 </Suspense>
               }
           />
-        <Route path="/login" // restricted
+        <Route path="/login" 
           element={
             <Suspense fallback={<p>Downloading...</p>}>
             <PublicRoute >

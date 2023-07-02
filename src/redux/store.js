@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./authSlice";
 import { contactsReducer } from './contactsSlice';
-// import { filterReducer } from './filterSlice';
+import { filterReducer } from './filterSlice';
 import storage from 'redux-persist/lib/storage';
 import { 
     persistStore,
@@ -26,7 +26,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
     reducer: {
         contacts: contactsReducer,
-        // filter: filterReducer,
+        filter: filterReducer,
         auth: persistedReducer,
     },
     middleware(getDefaultMiddleware){  //middleware - прослойка, яка стоїть між відправкою action-а і його доставкою в reducer, і дозволяє щось змінити в цей проміжок

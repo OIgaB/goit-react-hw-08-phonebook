@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getContacts, postContact, excludeContact, patchContact } from '../services/contacts-api';
 
-// для доступу до контактів
+// для доступу до контактів (експортую все до contactsSlice)
 
 export const fetchContactsThunk = createAsyncThunk(
     'contacts/fetchAll',
-    async (_, { rejectWithValue}) => { 
+    async (_, { rejectWithValue }) => { 
         try {
             const data = await getContacts();
             
@@ -19,7 +19,7 @@ export const fetchContactsThunk = createAsyncThunk(
 
 export const addContactThunk = createAsyncThunk(
     'contacts/addContact',
-    async (newContact, { rejectWithValue}) => { 
+    async (newContact, { rejectWithValue }) => { 
         try {
             const data = await postContact(newContact);
             // console.log(newContact);
@@ -32,7 +32,7 @@ export const addContactThunk = createAsyncThunk(
 
 export const deleteContactThunk = createAsyncThunk(
     'contacts/deleteContact',
-    async (contactId, { rejectWithValue}) => { 
+    async (contactId, { rejectWithValue }) => { 
         try {
             const data = await excludeContact(contactId);
             return data; 
@@ -44,7 +44,7 @@ export const deleteContactThunk = createAsyncThunk(
 
 export const updateContactThunk = createAsyncThunk(
     'contacts/updateContact',
-    async (contactId, { rejectWithValue}) => { 
+    async (contactId, { rejectWithValue }) => { 
         try {
             const data = await patchContact(contactId);
             return data; 

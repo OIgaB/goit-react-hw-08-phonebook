@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { logIn, logOut, getProfile } from '../services/auth-api';
 
 
-// Для авторизації
+// Для авторизації  (все експортую до authSlice)
 
 export const getProfileThunk = createAsyncThunk(
     'users/current',

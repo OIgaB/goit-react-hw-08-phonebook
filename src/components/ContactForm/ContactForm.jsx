@@ -1,6 +1,6 @@
 // // Форма додавання контактів. Це статична форма - не змінна (при відправці викликає ф-цію зміни state)
-import { addContact } from "redux/authOperations";
 import { useSelector, useDispatch } from "react-redux";  
+import { addContactThunk } from "../../redux/contactsOperations";
 import { getContacts } from "../../redux/selectors";        
 import { Form, Input, Button } from "./styled";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -23,7 +23,7 @@ export const ContactForm = () => {
         } 
         const newContact = {name, phone }; // email, birthdate
         
-        dispatch(addContact(newContact));  //відправка даних в contactsSlice -> operation -> contacts-api -> на бекенд
+        dispatch(addContactThunk(newContact));  //відправка даних в contactsSlice -> operation -> contacts-api -> на бекенд
     };
 
 

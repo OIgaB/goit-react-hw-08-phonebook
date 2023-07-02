@@ -1,31 +1,31 @@
-// // Фільтр пошуку у списку контактів
+// Фільтр пошуку у списку контактів
 
-// import { useDispatch } from "react-redux";
-// import { setFilter } from "../../redux/filterSlice";
-// import { Input } from '../ContactForm/styled';
-// import { Container } from "./styled";
+import { useDispatch } from "react-redux";
+import { setFilter } from "../../redux/filterSlice";
+import { Input } from '../ContactForm/styled';
+import { Container } from "./styled";
 
 
-// export const Filter = () => { 
-//     const dispatch = useDispatch();
+export const Filter = () => { 
+    const dispatch = useDispatch();
 
-//     const handleChange = ({ target: {value}}) => {
-//         dispatch(setFilter(value.trim()));  //відправка даних в filterSlice для записування в стор 
-//     };
+    const handleChange = ({ target: {value}}) => {
+        dispatch(setFilter(value.trim()));  //відправка даних в filterSlice для записування в стор 
+    };
 
-//     return (
-//         <Container>
-//             <label>
-//                 Find contacts by name
-//                 <Input 
-//                     type="name"
-//                     name="filter"
-//                     // value={filter} - ролі не грає
-//                     placeholder="Oles"
-//                     onChange={handleChange}
-//                     required
-//                 />
-//             </label>
-//         </Container>
-//     );
-// }
+    return (
+        <Container>
+            <label>
+                Find contacts by name
+                <Input 
+                    type="name"
+                    name="filter"
+                    // value={filter} - ролі не грає
+                    placeholder="Oles"
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+        </Container>
+    );
+}
