@@ -13,13 +13,12 @@ export const UserMenu = () => {
     const handleLogOut = () => {
         console.log('Ми в ф-ції handleLogOut');
         // dispatch(logOut());
-        // dellToken();
+        // dellToken();    
     }
 
     return (
         <div>
-            <p>mango@mail.com</p>
-            {profile && <h4>{profile.name}</h4>}
+            {profile && <h4>{profile.name}</h4>}      {/* profile - {name: '...', email: '...'} */}
             <button type="button" onClick={() => token ? handleLogOut() : navigate('/login')}>
                 {token ? 'Logout' : 'Login'}
             </button>
