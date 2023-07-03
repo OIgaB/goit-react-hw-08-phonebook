@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 import { Layout } from './Layout/Layout';
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
-import { fetchContactsThunk } from "../redux/contactsOperations";
+import {fetchCurrentUserThunk } from "../redux/authOperations";
 import { Container } from "./styled";
 
 // Відкладені імпорти. Сторінка не завантажиться, якщо її не відвідати
@@ -23,7 +23,7 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(fetchContactsThunk()) // при першому рендері викликає ф-цію запиту на бекенд за контактами
+      dispatch(fetchCurrentUserThunk()) // при першому рендері записує в заголовок токен зі стейту і викликає ф-цію запиту на бекенд за даними про юзера
   }, [dispatch]); //useEffect не знає що таке dispatch/чи він здатен змінитися і про всяк випадок просить його в залежність
 
   return (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-import { signUp } from '../services/auth-api';
+import { useDispatch } from 'react-redux';
+import { signUpThunk } from 'redux/authOperations';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
@@ -16,7 +16,7 @@ const styles = {
 };
 
 const RegisterPage = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -37,16 +37,17 @@ const RegisterPage = () => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    signUp({ name, email, password }).then(() => {
-      toast.success('Sign up successfully!')
-      navigate('/login');
-    })
-    // dispatch(signUp({ name, email, password }));
-    // setName('');
-    // setEmail('');
-    // setPassword('');
+    // signUp({ name, email, password }).then(() => {
+    //   toast.success('Sign up successfully!')
+    //   navigate('/login');
+    // })
+    await dispatch(signUpThunk({ name, email, password })).unwrap();
+    toast.success('Sign up successfully!')
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
