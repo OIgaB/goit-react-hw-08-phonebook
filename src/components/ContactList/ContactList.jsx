@@ -31,9 +31,6 @@ export const ContactList = () => {    // contacts - масив об'єктів
                             <Wrapper>
                                 <Name>{name}</Name>
                                 <Details>tel: <a href='tel:number'>{number}</a></Details>
-                                {/* <Details>email: <br/><a href='mailto:email'>{email}</a></Details> */}
-                                {/* <Details>birthdate: {birthdate.slice(0, 10)}</Details>  */}
-                                {/* <Image src={avatar} alt="avatar"/> */}
                             </Wrapper>
                             <Button type='button' onClick={() => dispatch(deleteContactThunk(id))}>Delete</Button>
                         </Contact>      

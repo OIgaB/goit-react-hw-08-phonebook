@@ -15,8 +15,9 @@ import {
  } from 'redux-persist'; 
  // redux-persist - бібліотека, яка гарантує, що ініціалізація додатку буде відкладена до тих пір, поки localStorage не буде прочитаний
 
+
 const persistConfig = {
-    key: 'token',
+    key: 'auth',
     storage,
     whitelist: ['token'],  // в localStorage закидуємо лише токен
 }
@@ -25,9 +26,9 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
     reducer: {
+        auth: persistedReducer,
         contacts: contactsReducer,
         filter: filterReducer,
-        auth: persistedReducer,
     },
     middleware(getDefaultMiddleware){  //middleware - прослойка, яка стоїть між відправкою action-а і його доставкою в reducer, і дозволяє щось змінити в цей проміжок
         return getDefaultMiddleware({
@@ -36,6 +37,7 @@ export const store = configureStore({
             }, // action - серіалізована сутність, тобто коли можна зробити JSON.stringify - там не повинно бути ф-цій
         });
     },
+    devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

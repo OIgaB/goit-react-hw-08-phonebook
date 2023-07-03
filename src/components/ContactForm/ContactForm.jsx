@@ -12,7 +12,7 @@ export const ContactForm = () => {
     
     const dispatch = useDispatch();
 
-    const checkNameClone = (name, phone ) => {  //email, birthdate
+    const checkNameClone = (name, number ) => {  
         const nameClone = contacts.find((contact) => ( // вертає об'єкт з ім'ям, що повторюється (якщо є)
           contact.name.toLowerCase() === name.toLowerCase()
         ));
@@ -21,9 +21,9 @@ export const ContactForm = () => {
           Notify.failure(`${name} is already in contacts`); 
           return;
         } 
-        const newContact = {name, phone }; // email, birthdate
+        const newContact = { name, number }; 
         
-        dispatch(addContactThunk(newContact));  //відправка даних в contactsSlice -> operation -> contacts-api -> на бекенд
+        dispatch(addContactThunk(newContact));  //відправка даних в contactsSlice -> contactsOperations -> contacts-api -> на бекенд
     };
 
 
@@ -32,17 +32,8 @@ export const ContactForm = () => {
 
         const inputName = event.target.elements.name.value.trim();
         const inputNumber = event.target.elements.number.value.trim();
-//         let inputEmail = event.target.elements.email.value.trim();
-//         let inputBirthdate = event.target.birthdate.value;
-
-//         if(inputEmail === '') {
-//             inputEmail = 'N/A';
-//         } 
-//         if(inputBirthdate === '') {
-//             inputBirthdate = 'N/A';
-//         } 
         
-        checkNameClone(inputName, inputNumber); //inputEmail, inputBirthdate
+        checkNameClone(inputName, inputNumber); 
         event.target.reset();
     }
 
