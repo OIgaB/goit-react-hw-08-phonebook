@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { lazy } from "react";
 import { Route, Routes } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast'
 
 import { Layout } from './Layout/Layout';
 import PublicRoute from "./PublicRoute";
@@ -18,7 +17,7 @@ const ContactsPage = lazy(() => import ('../pages/ContactsPage'));
 
 
 export const App = () => {
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +26,6 @@ export const App = () => {
 
   return (
     <Container>
-      <Toaster />
       <Routes>  
         <Route path='/' element={<Layout/>}>    {/* Header і Outlet (children) */}
             <Route index element={<HomePage/>} />

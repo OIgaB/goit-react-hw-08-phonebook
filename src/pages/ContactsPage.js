@@ -5,6 +5,7 @@ import { getContacts, getFilter } from "../redux/selectors";
 import { ContactForm } from '../components/ContactForm/ContactForm';
 import { Filter } from '../components/Filter/Filter';
 import { ContactList } from '../components/ContactList/ContactList';
+import { Loader } from '../components/Loader/Loader';
 import { Container, SubTitle, AlertMessage } from "../components/styled";
 
 
@@ -32,9 +33,9 @@ const ContactsPage = () => {
             <Filter />
 
             {error && <h2>{error}</h2>}   {/* Наприклад, Request failed with status code 401 - Missing header with authorization token.*/}
-            {isLoading && <h2>Loading...</h2>} 
+            {isLoading && <Loader/>} 
             {filteredContacts.length !== 0 && <ContactList />}
-            {filteredContacts.length === 0 && <AlertMessage>There is no contact matching your request.</AlertMessage>}  
+            {filteredContacts.length === 0 && <AlertMessage>There are no available contacts. Add some.</AlertMessage>}  
         </Container>
     );
   }
