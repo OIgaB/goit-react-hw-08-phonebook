@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const ListContainer = styled.ul`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
@@ -22,7 +21,7 @@ export const Contact = styled.li`
 `;
 
 export const Wrapper = styled.div`
-    height: 220px;
+    min-height: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,19 +36,12 @@ export const Name = styled.p`
 `;
 
 export const Details = styled.p`
-    margin: 0;
-    font-size: 13px;
+    font-size: 20px;
     font-style: italic;
     color: rgb(240,220,130);
 `;
 
-export const Image = styled.img`
-    margin-top: 5px;
-    border-radius: 4px;
-`;
-
 export const Button = styled.button`
-    margin-top: 10px;
     background-color: rgb(155,135,12);
     font-family: inherit;
     border: none;

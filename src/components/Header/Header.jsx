@@ -1,38 +1,24 @@
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import { getAuth } from '../../redux/selectors';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from 'components/AuthNav/AuthNav';
+import { StyledLink, StyledHeader, Container } from './styled';
 
 
-const styles = {
-    link: {
-      display: 'inline-block',
-      textDecoration: 'none',
-      padding: 12,
-      fontWeight: 700,
-      color: '#2A363B',
-    },
-    // activeLink: {
-    //   color: '#E84A5F',
-    // },
-  };
-
-export const Header = () => {  
-    const { token } = useSelector((state) => state.auth);  
+export const Header = () => {   // або AppBar
+    const { isLoggedIn } = useSelector(getAuth);  
 
     return (
-        <header>
+        <StyledHeader>
             <nav>
-                <NavLink to="/" style={styles.link} >
-                    Phonebook
-                </NavLink>
-                {/* activeStyle={styles.activeLink} */}
-                <NavLink to="/contacts" style={styles.link} >
-                    Contacts
-                </NavLink>
-                {/* activeStyle={styles.activeLink} */}
-                {token ? <UserMenu/> : <AuthNav/>}
+                <Container>
+                    <div>
+                        <StyledLink to="/">Home</StyledLink>
+                        {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
+                    </div>
+                    {isLoggedIn ? <UserMenu/> : <AuthNav/>}
+                </Container>
             </nav>
-        </header>
+        </StyledHeader>
     );
 }

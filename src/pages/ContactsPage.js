@@ -9,7 +9,7 @@ import { Container, SubTitle, AlertMessage } from "../components/styled";
 
 
 const ContactsPage = () => {
-  const { items: contacts, loading, error } = useSelector(getContacts); // items - масив об'єктів зі стору
+  const { items: contacts, isLoading, error } = useSelector(getContacts); // items - масив об'єктів зі стору
   const filter = useSelector(getFilter); // рядок зі стору/
   const dispatch = useDispatch();
 
@@ -31,8 +31,8 @@ const ContactsPage = () => {
             <SubTitle>Contacts</SubTitle>
             <Filter />
 
-            {error && <h2>{error}</h2>}   {/* Request failed with status code 401 - Missing header with authorization token.*/}
-            {loading && <h2>Loading...</h2>} 
+            {error && <h2>{error}</h2>}   {/* Наприклад, Request failed with status code 401 - Missing header with authorization token.*/}
+            {isLoading && <h2>Loading...</h2>} 
             {filteredContacts.length !== 0 && <ContactList />}
             {filteredContacts.length === 0 && <AlertMessage>There is no contact matching your request.</AlertMessage>}  
         </Container>

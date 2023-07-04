@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
-const setToken = token => {
+export const setToken = token => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 } // При оновленні сторінки axios будується з нуля. Щоб одразу з авторизаційним ключем, Bearer треба прописувати тут, а не у аргументі setToken
 // Тепер усі запити (common) будуть іти з токеном.
@@ -43,7 +43,6 @@ export const loginThunk = createAsyncThunk(
             const { data } = await axios.post('/users/login', credentials)  // на цьому етапі створюється токен
                 if('token' in data) setToken(data.token) 
                 return data; // {token: ..., user: {name: ..., email: ...}}
-                // dispatch(getProfileThunk());
         } catch (error){
             return rejectWithValue(error.response.data.message);
         }

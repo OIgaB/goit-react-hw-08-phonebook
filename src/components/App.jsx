@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { lazy } from "react";
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast'
-import { Suspense } from 'react'
 
 import { Layout } from './Layout/Layout';
 import PublicRoute from "./PublicRoute";
@@ -32,34 +31,10 @@ export const App = () => {
       <Routes>  
         <Route path='/' element={<Layout/>}>    {/* Header і Outlet (children) */}
             <Route index element={<HomePage/>} />
-            <Route
-                path='/contacts'
-                element={
-                    <PrivateRoute>
-                      <ContactsPage />
-                    </PrivateRoute>                     
-                }
-            />  
-        </Route>       
-          <Route path="/register"  
-              element={
-                <Suspense fallback={<p>Downloading...</p>}>
-                <PublicRoute >
-                    <RegisterPage />
-                </PublicRoute> 
-                </Suspense>
-              }
-          />
-        <Route path="/login" 
-          element={
-            <Suspense fallback={<p>Downloading...</p>}>
-            <PublicRoute >
-                <LoginPage />
-            </PublicRoute> 
-            </Suspense>
-          }
-        />
-
+            <Route path='/contacts' element={<PrivateRoute><ContactsPage /></PrivateRoute>} />       
+            <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+            <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+        </Route>  
       </Routes>
     </Container>
   );

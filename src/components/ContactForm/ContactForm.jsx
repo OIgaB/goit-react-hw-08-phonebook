@@ -68,24 +68,3 @@ export const ContactForm = () => {
         </Form>
     );
 }
-//             <label>
-//                 Email
-//                 <Input
-//                     type="email"
-//                     name="email"
-//                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-//                     title="characters@characters.tt (at least 2 letters 'a-z' in the end)" 
-//                     placeholder="oles.honchar@gmail.com"
-//                 />
-//             </label>
-//             <label>
-//                 Birthdate
-//                 <Input
-//                     type="date"
-//                     name="birthdate"
-//                     pattern="\d{1,2}/\d{1,2}/\d{4}" 
-//                     title="dd.mm.yyyy" 
-//                     // placeholder="01.01.1980"
-//                     min="1923-01-01" 
-//                 />
-//             </label>

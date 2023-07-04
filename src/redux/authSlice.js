@@ -4,39 +4,47 @@ import { signUpThunk, loginThunk, logoutThunk, fetchCurrentUserThunk } from './a
 const initialState = {   
     user: { name: null, email: null },
     token: null,
-    isLoading: false,
+    isLoggedIn: false,
+    isRefreshing: false, // = isLoading
     error: null,
 };
 
 const handlePending = (state) => {
-    state.isLoading = true;
+    state.isRefreshing = true;
     state.error = null;
 }
 
 const handleSignUpFulfilled = (state, { payload }) => {
-    state.isLoading = false;
+    state.user = payload.user;    
     state.token = payload.token;
+    state.isLoggedIn = false; 
+    state.isRefreshing = false;
+
 }
 
 const handleLoginFulfilled = (state, { payload }) => { 
-    state.isLoading = false;
+    state.user = payload.user;
     state.token = payload.token;
+    state.isLoggedIn = true;
+    state.isRefreshing = false;
 }
 
 const handleLogoutFulfilled = (state) => { // скидання стейту до вихідного стану 
-    state.isLoading = false;
+    state.user = { name: null, email: null };
     state.token = null;
-    state.user = null;
+    state.isLoggedIn = false;
+    state.isRefreshing = false;
     state.error = null;
 }
 
 const handleFulfilledProfile = (state, { payload }) => {  
-    state.isLoading = false;
     state.user = payload;
+    state.isLoggedIn = true;
+    state.isRefreshing = false;
 }
 
 const handleRejected = (state, { error, payload }) => {
-    state.isLoading = false;
+    state.isRefreshing = false;
     state.error = payload ?? error.message;
 }
 

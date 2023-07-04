@@ -5,7 +5,6 @@ import { deleteContactThunk } from '../../redux/contactsOperations';
 import { useSelector, useDispatch } from "react-redux"; 
 import { getContacts, getFilter } from "../../redux/selectors";
 import { ListContainer, Contact, Wrapper, Name, Details, Button } from "./styled";  //Image,
-// // import PropTypes from 'prop-types';
 
 
 export const ContactList = () => {    // contacts - масив об'єктів 
@@ -32,6 +31,7 @@ export const ContactList = () => {    // contacts - масив об'єктів
                                 <Name>{name}</Name>
                                 <Details>tel: <a href='tel:number'>{number}</a></Details>
                             </Wrapper>
+                            {/* <Button type='button' onClick={() => dispatch(updateContactThunk(id))}>Edit</Button> */}
                             <Button type='button' onClick={() => dispatch(deleteContactThunk(id))}>Delete</Button>
                         </Contact>      
                     ))} 
@@ -40,15 +40,3 @@ export const ContactList = () => {    // contacts - масив об'єктів
         </>
     );
 }
-
-
-// // ContactList.propTypes = {
-// //     contacts: PropTypes.arrayOf(PropTypes.shape ({
-// //         id: PropTypes.string.isRequired,
-// //         name: PropTypes.string.isRequired,
-// //         phone: PropTypes.string.isRequired,
-// //         email: PropTypes.string.isRequired,
-// //         birthdate: PropTypes.string.isRequired,
-// //         avatar: PropTypes.string.isRequired,
-// //     })),
-// // };

@@ -1,29 +1,19 @@
 import React from 'react';
+import { Wrapper, Title, Text, Image } from './styled';
+import phonebookImg from '../services/phonebook.jpg';
 
-const styles = {
-  container: {
-    minHeight: 'calc(100vh - 50px)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
-};
 
 const HomePage = () => (
-  <div style={styles.container}>
-    <h1 style={styles.title}>Phonebook</h1>
-    <p>
+  <Wrapper>
+    <Title>Phonebook</Title> 
+    <Text>
       Welcome to the phonebook app, your ultimate solution for contact management. 
-      Sign up, log in, and effortlessly create, update, and delete contacts, while enjoying the convenience of making calls within the app. 
-      Experience seamless connectivity and stay organized with ease. 
-      <span role="img" aria-label="phone">☎️</span>
-    </p>
-  </div>
+      <br/> Sign up, log in, and effortlessly create and delete contacts, while enjoying the convenience of making calls within the app. 
+      <br/> Experience seamless connectivity and stay organized with ease. 
+      {/* <span role="img" aria-label="phone">☎️</span> */}
+    </Text>
+    <Image src={phonebookImg} alt="Phonebook"/>
+  </Wrapper>
 );
 
 export default HomePage;
